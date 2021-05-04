@@ -81,6 +81,252 @@ for element in tutti_i_file0:
         carica_file(element)
 
 
+for element in tutti_i_file1:
+    if not(element.__contains__("classes")):
+        carica_file(element)
+
+
+for element in tutti_i_file2:
+    if not(element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file3:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file4:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file5:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file6:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file7:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file8:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file9:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file10:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file11:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file12:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file13:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file14:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file15:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file16:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file17:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file18:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file19:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file20:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file21:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file22:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file23:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file24:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file25:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file26:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file27:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file28:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file29:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file30:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file31:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file32:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file33:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file34:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file35:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file36:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file37:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file38:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file39:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file40:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file41:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file42:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file43:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file44:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file45:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file46:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file47:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file48:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file49:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file50:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file51:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file52:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file53:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file54:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file55:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file56:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file57:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file58:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file59:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file60:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+for element in tutti_i_file61:
+    if not (element.__contains__("classes")):
+        carica_file(element)
+
+
 cursor = collection.find({})
 for document in cursor:
     print(document)
