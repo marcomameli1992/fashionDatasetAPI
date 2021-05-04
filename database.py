@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from pathlib import Path
 import glob
 
 client = MongoClient(port=27017)
@@ -31,8 +32,42 @@ tutti_i_file23 = glob.glob("D:\dati_progetto_moda\Instagram\Hogan\*.txt")
 tutti_i_file24 = glob.glob("D:\dati_progetto_moda\Instagram\hoganbag\*.txt")
 tutti_i_file25 = glob.glob("D:\dati_progetto_moda\Instagram\MARSUPIO\*.txt")
 tutti_i_file26 = glob.glob("D:\dati_progetto_moda\Instagram\SECCHIELLO\*.txt")
-
-
+tutti_i_file27 = glob.glob("D:\dati_progetto_moda\Instagram\CLUTCH\\rogervivierbags\*.txt")
+tutti_i_file28 = glob.glob("D:\dati_progetto_moda\Instagram\hoganbag\\rogervivierbag\*.txt")
+tutti_i_file29 = glob.glob("D:\dati_progetto_moda\Instagram\\rogervivier\*.txt")
+tutti_i_file30 = glob.glob("D:\dati_progetto_moda\Instagram\\rogervivierbag\*.txt")
+tutti_i_file31 = glob.glob("D:\dati_progetto_moda\Instagram\\rogervivierbags\*.txt")
+#tutti i file delle cartelle TOD_s
+tutti_i_file32 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\ADVERTISING\ADV_ISTITUZIONALE\FW19-20\Adv_worldwide\Foto_Social\*.txt")
+tutti_i_file33 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\ADVERTISING\ADV_ISTITUZIONALE\FW19-20\Adv_worldwide\Immagini_adv\*.txt")
+tutti_i_file34 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\ADVERTISING\ADV_ISTITUZIONALE\FW19-20\Adv-Japan-Maggie_Jiang\Immagini\*.txt")
+tutti_i_file35 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\ADVERTISING\ADV_ISTITUZIONALE\FW19-20\Box_NYT_2x7\*.txt")
+tutti_i_file36 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\ADVERTISING\ADV_ISTITUZIONALE\FW20-21\Adv_Cina\Foto_Social\*.txt")
+tutti_i_file37 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\ADVERTISING\ADV_ISTITUZIONALE\FW20-21\Adv_Cina\Immagini_adv\*.txt")
+tutti_i_file38 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\ADVERTISING\ADV_ISTITUZIONALE\FW20-21\Adv_Worldwide\Foto_Social\*.txt")
+tutti_i_file39 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\ADVERTISING\ADV_ISTITUZIONALE\FW20-21\Adv_Worldwide\Immagini_adv\*.txt")
+tutti_i_file40 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\ADVERTISING\ADV_ISTITUZIONALE\Pre_FW20-21\Immagini_adv\*.txt")
+tutti_i_file41 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\ADVERTISING\ADV_ISTITUZIONALE\Pre_SS21\Foto_Social\*.txt")
+tutti_i_file42 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\ADVERTISING\ADV_ISTITUZIONALE\Pre_SS21\Immagini_adv\*.txt")
+tutti_i_file43 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\ADVERTISING\ADV_ISTITUZIONALE\SS20\Foto_Social\*.txt")
+tutti_i_file44 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\ADVERTISING\ADV_ISTITUZIONALE\SS20\Immagini_adv\*.txt")
+tutti_i_file45 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\ADVERTISING\ADV_ISTITUZIONALE\SS20_RESORT\Foto_Social\*.txt")
+tutti_i_file46 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\ADVERTISING\ADV_ISTITUZIONALE\SS20_RESORT\Immagini_adv\*.txt")
+tutti_i_file47 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\ADVERTISING\ADV_ISTITUZIONALE\SS21\Foto_Social\*.txt")
+tutti_i_file48 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\ADVERTISING\ADV_ISTITUZIONALE\SS21\Immagini_adv\*.txt")
+tutti_i_file49 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\CATALOGHI\\1_AI_19_20\*.txt")
+tutti_i_file50 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\CATALOGHI\\2_SS_20\*.txt")
+tutti_i_file51 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\CATALOGHI\\3_AI_20_21\*.txt")
+tutti_i_file52 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\CATALOGHI\\4_SS_21\*.txt")
+tutti_i_file53 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\DIGITAL_PROJECTS\FW19-20\ALBER_ELBAZ_HAPPY_MOMENTS\*.txt")
+tutti_i_file54 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\DIGITAL_PROJECTS\FW20-21\A_PAWFECT_HOLIDAY_DogsProject\*.txt")
+tutti_i_file55 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\DIGITAL_PROJECTS\FW20-21\HOLLY_BAG\BTS_Images\*.txt")
+tutti_i_file56 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\DIGITAL_PROJECTS\FW20-21\HOLLY_BAG\STILLS_FROM_VIDEO\*.txt")
+tutti_i_file57 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\DIGITAL_PROJECTS\PE20\FULL_SUMMER_DREAM\*.txt")
+tutti_i_file58 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\DIGITAL_PROJECTS\PE20\MAME\*.txt")
+tutti_i_file59 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\DIGITAL_PROJECTS\PE20\MY_TODS_CLOSET\*.txt")
+tutti_i_file60 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\DIGITAL_PROJECTS\PE20\TIMELESS\*.txt")
+tutti_i_file61 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\DIGITAL_PROJECTS\PE21\SHIRT_BAG\*.txt")
 
 def carica_file(a):
     f = open(a)
@@ -40,10 +75,9 @@ def carica_file(a):
     text_file = {"nome_file": a, "contenuto": text}
     collection.insert(text_file)
 
-for number in range(27)
-    appoggio="tutti_i_file"+str(number)
-    for element in appoggio:
-        carica_file(element)
+
+for element in tutti_i_file0:
+    carica_file(element)
 
 
 cursor = collection.find({})
@@ -51,7 +85,5 @@ for document in cursor:
     print(document)
 
 print("--------------------------------------")
-print("Il database contiene: "+str(db.files.count())+" elementi.")
+print("Il database contiene: " + str(db.files.count()) + " elementi.")
 print(db.files.count())
-
-
