@@ -77,7 +77,8 @@ def carica_file(a):
 
 
 for element in tutti_i_file0:
-    carica_file(element)
+    if not(element.__contains__("classes")):
+        carica_file(element)
 
 
 cursor = collection.find({})
