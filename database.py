@@ -1,23 +1,20 @@
 from pymongo import MongoClient
 from pathlib import Path
+import glob
 
 client = MongoClient(port=27017)
 db = client.dati_da_analizzare
 collection = db.files
-
+tutti_i_file = glob.glob("D:\dati_progetto_moda\*.txt")
 
 
 def carica_file(a):
-    data_folder = Path("D:\Instagram-20210504T103737Z-001\Instagram\BAULETTO")
-    a = a+'.txt'
-    file_to_open = data_folder / a
-    f = open(file_to_open)
+    f = open(a)
     text = f.read()
     text_file = {"nome_file": a, "contenuto": text}
     collection.insert(text_file)
 
+for element in tutti_i_file:
+    carica_file(element)
 
-carica_file("2020-11-14_14-37-01_UTC.xml")
-carica_file("2020-11-14_16-46-36_UTC.xml")
-carica_file("2020-11-14_16-47-10_UTC.xml")
-carica_file()
+
