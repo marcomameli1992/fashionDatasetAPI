@@ -1,10 +1,10 @@
 from pymongo import MongoClient
-from pathlib import Path
 import glob
 
 client = MongoClient(port=27017)
 db = client.dati_da_analizzare
 collection = db.files
+
 tutti_i_file0 = glob.glob("D:\dati_progetto_moda\Instagram\BAULETTO\*.txt")
 tutti_i_file1 = glob.glob("D:\dati_progetto_moda\Instagram\BRAND\FAY\*.txt")
 tutti_i_file2 = glob.glob("D:\dati_progetto_moda\Instagram\BRAND\HOGAN\BAULETTO\*.txt")
@@ -69,10 +69,19 @@ tutti_i_file59 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\DIGITAL_PROJ
 tutti_i_file60 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\DIGITAL_PROJECTS\PE20\TIMELESS\*.txt")
 tutti_i_file61 = glob.glob("D:\dati_progetto_moda\TOD's\TOD_s\\tods\DIGITAL_PROJECTS\PE21\SHIRT_BAG\*.txt")
 
-def carica_file(a):
-    f = open(a)
+
+def carica_file(file_to_open):
+    f = open(file_to_open)
     text = f.read()
-    text_file = {"nome_file": a, "contenuto": text}
+    content=list()
+    n_righe=text.count('\n')
+    riga=text.split('\n')
+
+    for n in range(n_righe):
+        dato=riga[n].split(" ")
+        content.append(dato)
+
+    text_file = {"nome_file": file_to_open, "contenuto": content}
     collection.insert(text_file)
 
 
