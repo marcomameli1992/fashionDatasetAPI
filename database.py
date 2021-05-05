@@ -70,16 +70,30 @@ tutti_i_file60 = glob.glob("Image\\tods\DIGITAL_PROJECTS\PE20\TIMELESS\*.txt")
 tutti_i_file61 = glob.glob("Image\\tods\DIGITAL_PROJECTS\PE21\SHIRT_BAG\*.txt")
 
 
+class Valore:
+    def __init__(self, tipo, val1, val2, val3, val4):
+        self.tipo=tipo,
+        self.val1=val1,
+        self.val2=val2,
+        self.val3=val3,
+        self.val4=val4
+
+
 def carica_file(file_to_open):
     f = open(file_to_open)
     text = f.read()
     content=list()
+    appoggio=list()
     n_righe=text.count('\n')
     riga=text.split('\n')
 
     for n in range(n_righe):
         dato=riga[n].split(" ")
-        content.append(dato)
+        appoggio.append(dato)
+
+    for k in range(n_righe):
+        text_valore = {"classe_oggetto":appoggio[k][0], "val_1":appoggio[k][1], "val_2":appoggio[k][2], "val_3":appoggio[k][3], "val_4":appoggio[k][4]}
+        content.append(text_valore)
 
     text_file = {"nome_file": file_to_open, "numero_oggetti":n_righe, "contenuto": content}
     collection.insert(text_file)
