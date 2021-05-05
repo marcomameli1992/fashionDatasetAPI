@@ -81,7 +81,7 @@ def carica_file(file_to_open):
         dato=riga[n].split(" ")
         content.append(dato)
 
-    text_file = {"nome_file": file_to_open, "contenuto": content}
+    text_file = {"nome_file": file_to_open, "numero_oggetti":n_righe, "contenuto": content}
     collection.insert(text_file)
 
 
