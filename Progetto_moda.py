@@ -1,25 +1,31 @@
-from flask import Flask
-from flask_restful import Resource, Api
-from apispec import APISpec
-from marshmallow import Schema, fields
-from apispec.ext.marshmallow import MarshmallowPlugin
-from flask_apispec.extension import FlaskApiSpec
-from flask_apispec.views import MethodResource
-from flask_apispec import marshal_with, doc, use_kwargs
-
-app=Flask(__name__)
-api=Api(app)
-/*app.config.update({
-    'APISPEC_SPEC':APISpec(
-        title='Progetto Moda',
-        version='v1',
-        plugins=[MarshmallowPlugin()],
-        openapi_version='2.0.0'
-    ),
-    'APISPEC_SWAGGER_URL':'/swagger/',
-    'APISPEC_SWAGGER_UI_URL':'/swagger-ui/'
-})
-docs=FlaskApiSpec(app)
-
-class ModaResponseSchema(Schema):
+import flask
+from flask import request, jsonify
+from database import collection
+app = flask.Flask(__name__)
+app.config["DEBUG"] = True
+@app.route('/imm_per_classe', methods=['GET'])
+def im_per_classe():
+    appoggio=list()
+    for classe in range(8):
+        classe=str(classe)
+        immagini_per_classe=collection.find({"contenuto.classe_oggetto":classe}).count()
+        text_valore = {f'Le foto con oggetti della classe {classe} sono':immagini_per_classe}
+	appoggio.append(text_valore)
+    return jsonify(appoggio)
+@app.route('/molti_oggetti/all', methods=['GET'])
+def piu_di_uno():
+    piuoggettipresenti = collection.find({'numero_oggetti': {"$gt": 1}}).count()
+    text_valore = {"Le foto con piu' oggetti presenti sono:": piuoggettipresenti}
+    return text_valore
+@app.route('/molti_oggetti', methods=['GET'])
+def piu_stessa_classe():
+    if 'classe' in request.args:
+        classe = str(request.args['classe'])
+        st_classe = collection.find(
+            {"$and": [{"contenuto.classe_oggetto": classe}, {'numero_oggetti': {"$gt": 1}}]}).count()
+        text_valore = {f'Le foto con piu\' di un oggetto della classe {classe} sono': st_classe}
+        return text_valore
+    else:
+        return "Errore: Non hai specificato la classe. Riprova specificando la classe."
+app.run()
 
