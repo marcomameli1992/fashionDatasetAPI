@@ -8,6 +8,7 @@ app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
 
+# API n.1: conteggio di numero di immagini per classe
 @app.route('/imm_per_classe', methods=['GET'])
 def im_per_classe():
     appoggio = list()
@@ -19,6 +20,7 @@ def im_per_classe():
     return jsonify(appoggio)
 
 
+# API n.2: conteggio di immagini con più di un oggetto dentro
 @app.route('/molti_oggetti/all', methods=['GET'])
 def piu_di_uno():
     piuoggettipresenti = collection.find({'numero_oggetti': {"$gt": 1}}).count()
@@ -26,6 +28,7 @@ def piu_di_uno():
     return text_valore
 
 
+# API n.2-1: conteggio di immagini con più di un oggetto della stessa classe dentro
 @app.route('/molti_oggetti', methods=['GET'])
 def piu_stessa_classe():
     if 'classe' in request.args:
@@ -38,6 +41,24 @@ def piu_stessa_classe():
         return "Errore: Non hai specificato la classe. Riprova specificando la classe."
 
 
+# API n.2-2: conteggio di immagini con più di un oggetto di classi dentro
+@app.route('/molti_oggetti/molte_classi', methods=['GET'])
+def piu_uno_piu_classi():
+    piu_classi = collection.find({'numero_oggetti': {"$gt": 1}})
+    contatore = 0
+    for i in piu_classi:
+        array = i['contenuto']
+        confronto = array[0]['classe_oggetto']
+        for j in array:
+            classe = j['classe_oggetto']
+            if classe != confronto:
+                contatore += 1
+                break
+
+    return "Le foto con piu\' di un oggetto di classi diverse sono " + str(contatore)
+
+
+# API n.3: per una determinata classe quale è il colore predominante
 @app.route('/dominante')
 def colore_dominante():
     if 'img' in request.args:
