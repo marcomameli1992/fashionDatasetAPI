@@ -1,8 +1,14 @@
 import flask
+import torch
 from flask import request, jsonify
 from database import collection
 from sklearn.cluster import KMeans
 import cv2
+import numpy as np
+import tensorflow as tf
+import torchvision.models as models
+
+
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -81,5 +87,25 @@ def colore_dominante():
     else:
         return "Errore: Non hai specificato l'immagine. Riprova specificando l'immagine'."
 
+
+#API 4: Vgg16
+@app.route('/predvgg')
+def pred_vgg():
+    if 'img' in request.args:
+        jpg = str(request.args['img'])
+        img = cv2.resize(cv2.imread(jpg),(224,224)).ty
+        (tf.int32)
+        img[:,:,0]-=103.939
+        img[:, :, 1] -= 116.779
+        img[:, :, 2] -= 123.68
+        img = img.transpose((2, 0, 1))
+        img = np.expand_dims(img, axis=0)
+        model = models.vgg16(pretrained=True)
+        model.eval()
+        predictions = model(img)
+        text_valore = {f'Le predizioni per l\'immagine {jpg} sono': predictions}
+        return text_valore
+    else:
+        return "Errore: Non hai specificato un immagine. Riprova specificando un'immagine corretta."
 
 app.run()
