@@ -5,8 +5,9 @@ from database import collection
 from sklearn.cluster import KMeans
 import cv2
 import numpy as np
-import tensorflow as tf
+import torchvision.transforms.functional as functional
 import torchvision.models as models
+from PIL import Image
 
 
 
@@ -93,17 +94,27 @@ def colore_dominante():
 def pred_vgg():
     if 'img' in request.args:
         jpg = str(request.args['img'])
-        img = cv2.resize(cv2.imread(jpg),(224,224)).ty
-        (tf.int32)
-        img[:,:,0]-=103.939
-        img[:, :, 1] -= 116.779
-        img[:, :, 2] -= 123.68
-        img = img.transpose((2, 0, 1))
-        img = np.expand_dims(img, axis=0)
+        img = Image.open(jpg)
+        from torchvision import transforms
+        transform = transforms.Compose([  # [1]
+            transforms.Resize(256),  # [2]
+            transforms.CenterCrop(224),  # [3]
+            transforms.ToTensor(),  # [4]
+            transforms.Normalize(  # [5]
+                mean=[0.485, 0.456, 0.406],  # [6]
+                std=[0.229, 0.224, 0.225]  # [7]
+            )])
+
+        # img = cv2.resize(cv2.imread('./255201749_3778225.jpg'),(224,224))
+        img_t = transform(img)
+        batch_t = torch.unsqueeze(img_t, 0)
+
+        # img = np.expand_dims(img, axis=0)
         model = models.vgg16(pretrained=True)
+        # model.to(device)
         model.eval()
-        predictions = model(img)
-        text_valore = {f'Le predizioni per l\'immagine {jpg} sono': predictions}
+        predictions = model(batch_t)
+        text_valore = "Le predizioni per l\'immagine sono':"+str(predictions)
         return text_valore
     else:
         return "Errore: Non hai specificato un immagine. Riprova specificando un'immagine corretta."
