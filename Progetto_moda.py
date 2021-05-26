@@ -1,15 +1,13 @@
 import flask
 import torch
 from flask import request, jsonify
+from matplotlib import pyplot as plt, patches
+
 from database import collection
 from sklearn.cluster import KMeans
 import cv2
-import numpy as np
-import torchvision.transforms.functional as functional
 import torchvision.models as models
 from PIL import Image
-
-
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -61,8 +59,8 @@ def piu_uno_piu_classi():
             if classe != confronto:
                 contatore += 1
                 break
-
-    return "Le foto con piu\' di un oggetto di classi diverse sono " + str(contatore)
+    text_valore = {f'Le foto con piu\' di un oggetto di classi diverse sono': str(contatore)}
+    return text_valore
 
 
 # API n.3: per una determinata classe quale è il colore predominante
@@ -84,12 +82,44 @@ def colore_dominante():
             splittato = j.split()
             colori = '%02x%02x%02x' % (int(float(splittato[0])), int(float(splittato[1])), int(float(splittato[2])))
             esadecimali.append(colori)
-        return "I colori dominanti per l'immagine " + jpg + " sono " + str(esadecimali)
+        text_valore = {f'I colori dominanti per l\'immagine {jpg} sono': str(esadecimali)}
+        return text_valore
+
+        #return "I colori dominanti per l'immagine " + jpg + " sono " + str(esadecimali)
     else:
         return "Errore: Non hai specificato l'immagine. Riprova specificando l'immagine'."
 
 
-#API 4: Vgg16
+@app.route('/ssd')
+def ssd():
+    if 'img' in request.args:
+        jpg = str(request.args['img'])
+        import cv2
+        import torch
+        from PIL import Image
+
+        # Model
+        model = torch.hub.load('ultralytics/yolov5', 'yolov5s')
+
+        img1 = Image.open(jpg)  # PIL image
+        img2 = cv2.imread(jpg)[:, :, ::-1]  # OpenCV image (BGR to RGB)
+        imgs = [img1, img2]  # batch of images
+
+        # Inference
+        results = model(imgs, size=640)  # includes NMS
+
+        # Results
+        results.print()
+        results.save()  # or .show()
+
+        predictions = results.xyxy[0]  # img1 predictions (tensor)
+        predictions2 = results.pandas().xyxy[0].to_json(orient="records")  # img1 predictions (pandas)
+
+        return str(predictions) + "\n\n" + predictions2
+    else:
+        return "Errore: Non hai specificato un'immagine. Riprova specificando un'immagine corretta."
+
+# API 4: Vgg16
 @app.route('/predvgg')
 def pred_vgg():
     if 'img' in request.args:
@@ -114,13 +144,14 @@ def pred_vgg():
         # model.to(device)
         model.eval()
         predictions = model(batch_t)
-        #text_valore = "Le predizioni per l\'immagine sono':"+str(predictions)
-        result=str(predictions)
+        # text_valore = "Le predizioni per l\'immagine sono':"+str(predictions)
+        result = str(predictions)
         index_i = result.index('[')
         index_f = result.index(']')
-        risultato_stampa= result [index_i: index_f+2]
+        risultato_stampa = result[index_i: index_f + 2]
         return {f'Le predizioni per l\'immagine {jpg} sono': risultato_stampa}
     else:
         return "Errore: Non hai specificato un immagine. Riprova specificando un'immagine corretta."
+
 
 app.run()
