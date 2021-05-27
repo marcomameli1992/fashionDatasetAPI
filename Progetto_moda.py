@@ -146,10 +146,10 @@ def pred_vgg():
         predictions = model(batch_t)
         # text_valore = "Le predizioni per l\'immagine sono':"+str(predictions)
         result = str(predictions)
-        index_i = result.index('[')
-        index_f = result.index(']')
-        risultato_stampa = result[index_i: index_f + 2]
-        return {f'Le predizioni per l\'immagine {jpg} sono': risultato_stampa}
+        #index_i = result.index('[')
+        #index_f = result.index(']')
+        #risultato_stampa = result[index_i: index_f + 2]
+        return {f'Le predizioni per l\'immagine {jpg} sono': result}
     else:
         return "Errore: Non hai specificato un immagine. Riprova specificando un'immagine corretta."
 
