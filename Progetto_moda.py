@@ -13,6 +13,7 @@ app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
 
+<<<<<<< HEAD
 
 class FashionResponseSchema(Schema):
     message = fields.Str(default='Successo')
@@ -35,6 +36,8 @@ class FashionAPI(MethodResource, Resource):
             appoggio.append(text_valore)
         return jsonify(appoggio)
 =======
+=======
+>>>>>>> parent of 5a1dca8 (Update Progetto_moda.py)
 # API n.1: conteggio di numero di immagini per classe
 @app.route('/imm_per_classe', methods=['GET'])
 def im_per_classe():
@@ -45,6 +48,7 @@ def im_per_classe():
         text_valore = {f'Le foto con oggetti della classe {classe} sono': immagini_per_classe}
         appoggio.append(text_valore)
     return jsonify(appoggio)
+<<<<<<< HEAD
 >>>>>>> parent of 5a1dca8 (Update Progetto_moda.py)
 
     @doc(description='API per il conteggio del numero di immagini per classe.', tags=['Immagini'])
@@ -58,6 +62,8 @@ def im_per_classe():
             text_valore = {f'Le foto con oggetti della classe {classe} sono': immagini_per_classe}
             appoggio.append(text_valore)
         return jsonify(appoggio)
+=======
+>>>>>>> parent of 5a1dca8 (Update Progetto_moda.py)
 
 
 # API n.2: conteggio di immagini con più di un oggetto dentro
