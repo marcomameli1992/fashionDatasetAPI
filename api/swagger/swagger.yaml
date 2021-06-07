@@ -1,14 +1,213 @@
 swagger: "2.0"
 info:
+  description: "Creazione di API per analizzare un Fashion dataset e provare a predire i futuri trend nel campo della moda. Queste API lavorano con file di testo in formato .txt o con immagini."
   version: "1.0.0"
-  title: Fashion Dataset API
-host: localhost:5000
-basePath: /
-schemes:
-  http
-consumes:
-  -image/jpg
-  -text/txt
-produces:
-  application/json
+  title: "Fashion Dataset API"
+  
+tags:
+- name: "Classi"
+  description: "Analisi per classi (di oggetti)"
+  
+- name: "Colori"
+  description: "Analisi dei colori delle immagini"
+- name: "Modelli"
+  description: "Analisi con vgg e ssd delle immagini"
+  
+
 paths:
+  /imm_per_classe:
+    get:
+      tags:
+      - "Classi"
+      summary: "conteggio di numero di immagini per classe"
+      description: ""
+      
+      consumes:
+      - "text/plain; charset=utf-8"
+      produces:
+      - "application/json"
+    
+      responses:
+        "200":
+          description: "Operazione andata a buon fine"
+          schema:
+            type: "array"
+            items:
+              type: "object"
+              properties:
+                Le_foto_con_oggetti_della_classe_0_sono':
+                  type: "integer"
+                  format: "int64"
+                Le_foto_con_oggetti_della_classe_1_sono':
+                  type: "integer"
+                  format: "int64"
+                Le_foto_con_oggetti_della_classe_2_sono':
+                  type: "integer"
+                  format: "int64"
+                Le_foto_con_oggetti_della_classe_3_sono':
+                  type: "integer"
+                  format: "int64"
+                Le_foto_con_oggetti_della_classe_4_sono':
+                  type: "integer"
+                  format: "int64"
+                Le_foto_con_oggetti_della_classe_5_sono':
+                  type: "integer"
+                  format: "int64"
+                Le_foto_con_oggetti_della_classe_6_sono':
+                  type: "integer"
+                  format: "int64"
+                Le_foto_con_oggetti_della_classe_7_sono':
+                  type: "integer"
+                  format: "int64"
+      
+  /molti_oggetti/all:
+    get:
+      tags:
+      - "Classi"
+      summary: "conteggio di immagini con più di un oggetto dentro"
+      description: ""
+      
+      consumes:
+      - "text/plain; charset=utf-8"
+      produces:
+      - "application/json"
+    
+      responses:
+        "200":
+          description: "Operazione andata a buon fine"
+          schema:
+            type: "object"
+            properties:
+              Le_foto_con_piu_oggetti_presenti_sono:
+                type: "integer"
+  
+  /molti_oggetti:
+    get:
+      tags:
+      - "Classi"
+      summary: "conteggio di immagini con più di un oggetto della stessa classe dentro"
+      description: ""
+      
+      consumes:
+      - "text/plain; charset=utf-8"
+      produces:
+      - "application/json"
+      parameters:
+        - name: "classe"
+          in: query
+          description: "Numero della classe di cui si vuole eseguire il conteggio"
+          required: true
+          type: "string"
+      responses:
+        "200":
+          description: "Operazione andata a buon fine"
+          schema:
+            type: "object"
+            properties:
+              Le_foto_con_piu_di_un_oggetto_della_classe_{classe}_sono:
+                type: "integer"
+        "400":
+          description: "Non hai passato una classe"
+  /molti_oggetti/molte_classi:
+    get:
+      tags:
+      - "Classi"
+      summary: "conteggio di immagini con più di un oggetto di classi diverse dentro"
+      description: ""
+      
+      consumes:
+      - "text/plain; charset=utf-8"
+      produces:
+      - "application/json"
+      
+      responses:
+        "200":
+          description: "Operazione andata a buon fine"
+          schema:
+            type: "object"
+            properties:
+              Le_foto_con piu_di_un_oggetto_di_classi_diverse_sono:
+                type: "integer"
+  
+  /dominante:
+    get:
+      tags:
+        - "Colori"
+      summary: "conteggio di immagini con più di un oggetto della stessa classe dentro"
+      description: ""
+      
+      consumes:
+      - "text/plain; charset=utf-8"
+      produces:
+      - "application/json"
+      parameters:
+        - name: "img"
+          in: query
+          description: "Path dell'immagine della quale si vuole estrarre il colore dominante"
+          required: true
+          type: "string"
+      responses:
+        "200":
+          description: "Operazione andata a buon fine"
+          schema:
+            type: "object"
+            properties:
+              I_colori_dominanti_per_l_immagine_{img}_sono:
+                type: "array"
+                items:
+                  type: "string"
+        "400":
+          description: "Non hai passato un'immagine"        
+            
+  /ssd:
+    get:
+      tags:
+        - "Modelli"
+      summary: "riconoscimento oggetti presenti nell'immagine con modello ssd"
+      description: ""
+      
+      consumes:
+      - "text/plain; charset=utf-8"
+      produces:
+      - "application/json"
+      parameters:
+        - name: "img"
+          in: query
+          description: "Path dell'immagine della quale si vuole estrarre il colore dominante"
+          required: true
+          type: "string"
+      responses:
+        "200":
+          description: "Operazione andata a buon fine"
+          schema:
+            type: "string"
+        "400":
+          description: "Non hai passato un'immagine"  
+          
+  /predvgg:
+    get:
+      tags:
+        - "Modelli"
+      summary: "riconoscimento oggetti presenti nell'immagine con modello vgg"
+      description: ""
+      
+      consumes:
+      - "text/plain; charset=utf-8"
+      produces:
+      - "application/json"
+      parameters:
+        - name: "img"
+          in: query
+          description: "Path dell'immagine della quale si vuole estrarre il colore dominante"
+          required: true
+          type: "string"
+      responses:
+        "200":
+          description: "Operazione andata a buon fine"
+          schema:
+            type: "object"
+            properties:
+              Le_predizioni_per_l_immagine_{img}_sono:
+                type: "string"
+        "400":
+          description: "Non hai passato un'immagine" 
