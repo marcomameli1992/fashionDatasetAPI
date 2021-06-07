@@ -30,11 +30,23 @@ class FashionRequestSchema(Schema):
     api_type = fields.String(required=True, description="API tipo delle Fashion Dataset API")
 
 class FashionAPI(MethodResource, Resource):
-    @doc(description='API per il conteggio del numero di immagini per classe', tags=['Immagini'])
+    @doc(description='API per il conteggio del numero di immagini per classe.', tags=['Immagini'])
     @marshal_with(FashionResponseSchema)  # marshalling
     # API n.1: conteggio di numero di immagini per classe
     @app.route('/imm_per_classe', methods=['GET'])
     def im_per_classe(self):
+        appoggio = list()
+        for classe in range(8):
+            classe = str(classe)
+            immagini_per_classe = collection.find({"contenuto.classe_oggetto": classe}).count()
+            text_valore = {f'Le foto con oggetti della classe {classe} sono': immagini_per_classe}
+            appoggio.append(text_valore)
+        return jsonify(appoggio)
+
+    @doc(description='API per il conteggio del numero di immagini per classe.', tags=['Immagini'])
+    @use_kwargs(FashionRequestSchema, location=('json'))
+    @marshal_with(FashionResponseSchema)  # marshalling
+    def get(self):
         appoggio = list()
         for classe in range(8):
             classe = str(classe)

@@ -1,0 +1,14 @@
+swagger: "2.0"
+info:
+  version: "1.0.0"
+  title: Fashion Dataset API
+host: localhost:5000
+basePath: /
+schemes:
+  http
+consumes:
+  -image/jpg
+  -text/txt
+produces:
+  application/json
+paths:
