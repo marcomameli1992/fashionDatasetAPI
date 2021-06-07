@@ -91,7 +91,7 @@ def colore_dominante():
         return "Errore: Non hai specificato l'immagine. Riprova specificando l'immagine'."
 
 
-@app.route('/ssd')
+@app.route('/YOLOv5')
 def ssd():
     if 'img' in request.args:
         jpg = str(request.args['img'])

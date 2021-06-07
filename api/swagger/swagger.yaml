@@ -159,11 +159,11 @@ paths:
         "400":
           description: "Non hai passato un'immagine"        
             
-  /ssd:
+  /YOLOv5:
     get:
       tags:
         - "Modelli"
-      summary: "riconoscimento oggetti presenti nell'immagine con modello ssd"
+      summary: "riconoscimento oggetti presenti nell'immagine con modello YOLOv5"
       description: ""
       
       consumes:
