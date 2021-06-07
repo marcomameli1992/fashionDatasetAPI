@@ -13,7 +13,7 @@ app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
 
-<<<<<<< HEAD
+
 class FashionResponseSchema(Schema):
     message = fields.Str(default='Successo')
 
