@@ -3,14 +3,6 @@ import torch
 from flask import request, jsonify
 from matplotlib import pyplot as plt, patches
 
-from flask_restful import Resource, Api
-from apispec import APISpec
-from marshmallow import Schema, fields
-from apispec.ext.marshmallow import MarshmallowPlugin
-from flask_apispec.extension import FlaskApiSpec
-from flask_apispec.views import MethodResource
-from flask_apispec import marshal_with, doc, use_kwargs
-
 from database import collection
 from sklearn.cluster import KMeans
 import cv2
@@ -18,10 +10,10 @@ import torchvision.models as models
 from PIL import Image
 
 app = flask.Flask(__name__)
-api = Api(app)
 app.config["DEBUG"] = True
 
 
+<<<<<<< HEAD
 class FashionResponseSchema(Schema):
     message = fields.Str(default='Successo')
 
@@ -42,6 +34,18 @@ class FashionAPI(MethodResource, Resource):
             text_valore = {f'Le foto con oggetti della classe {classe} sono': immagini_per_classe}
             appoggio.append(text_valore)
         return jsonify(appoggio)
+=======
+# API n.1: conteggio di numero di immagini per classe
+@app.route('/imm_per_classe', methods=['GET'])
+def im_per_classe():
+    appoggio = list()
+    for classe in range(8):
+        classe = str(classe)
+        immagini_per_classe = collection.find({"contenuto.classe_oggetto": classe}).count()
+        text_valore = {f'Le foto con oggetti della classe {classe} sono': immagini_per_classe}
+        appoggio.append(text_valore)
+    return jsonify(appoggio)
+>>>>>>> parent of 5a1dca8 (Update Progetto_moda.py)
 
     @doc(description='API per il conteggio del numero di immagini per classe.', tags=['Immagini'])
     @use_kwargs(FashionRequestSchema, location=('json'))
@@ -184,19 +188,5 @@ def pred_vgg():
     else:
         return "Errore: Non hai specificato un immagine. Riprova specificando un'immagine corretta."
 
-#aggiunta per documentazione automatica
-app.config.update({
-    'APISPEC_SPEC': APISpec(
-        title='Fashion Dataset API',
-        version='v1',
-        description='Api che analizzano immagini per definire i futuri trend nel campo del fashion',
-        plugins=[MarshmallowPlugin()],
-        openapi_version='2.0.0'
-    ),
-    'APISPEC_SWAGGER_URL': '/swagger/',  # URI to access API Doc JSON
-    'APISPEC_SWAGGER_UI_URL': '/swagger-ui/'  # URI to access UI of API Doc
-})
-docs = FlaskApiSpec(app)
-api.add_resource(FashionAPI, '/imm_per_classe')
-docs.register(FashionAPI)
+
 app.run()
