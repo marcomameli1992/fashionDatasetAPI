@@ -43,7 +43,7 @@ class FashionAPI(MethodResource, Resource):
             appoggio.append(text_valore)
         return jsonify(appoggio)
 
-    @doc(description='API per il conteggio del numero di immagini per classe.', tags=['Classi'])
+    @doc(description='API per il conteggio del numero di immagini per classe.', tags=['Immagini'])
     @use_kwargs(FashionRequestSchema, location=('json'))
     @marshal_with(FashionResponseSchema)  # marshalling
     def get(self):
