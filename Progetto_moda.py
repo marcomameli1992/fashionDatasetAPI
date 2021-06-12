@@ -11,7 +11,9 @@ from PIL import Image
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
-
+""" #Fashion Dataset API"""
+"""Creazione di API per analizzare un Fashion dataset e provare a predire i futuri trend nel campo della moda. Queste API lavorano con file di testo in formato .txt o con immagini.
+E restituiscono i risultati in formato JSON"""
 # API n.1: conteggio di numero di immagini per classe
 @app.route('/imm_per_classe', methods=['GET'])
 def im_per_classe():
