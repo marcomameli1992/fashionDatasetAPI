@@ -64,7 +64,7 @@ Questa API restituisce un JSON contenente i colori dominanti di ciascun'immagine
 #### **API N°4:** RICONOSCIMENTO OGGETTI PERSENTI IN UN'IMMAGINE CON MODELLO YOLOv5 
 ###### /YOLOv5
  
-- **Parametri:** *img* -> una **stringa** che contiene il Path dell'immagine della quale si vuole estrarre il colore dominante
+- **Parametri:** *img* -> una **stringa** che contiene il Path dell'immagine della quale si vuole, mediante il modello YOLOv5, vedere quali oggetti vi siano presenti
 
 Questa API restituisce un JSON. Il risultato è il seguente:
 ```
@@ -74,7 +74,7 @@ Questa API restituisce un JSON. Il risultato è il seguente:
 #### **API N°5:** RICONOSCIMENTO OGGETTI PERSENTI IN UN'IMMAGINE CON MODELLO VGG
 ###### /predvgg
 
-- **Parametri:** *img* -> una **stringa** che contiene il Path dell'immagine della quale si vuole estrarre il colore dominante
+- **Parametri:** *img* -> una **stringa** che contiene il Path dell'immagine della quale si vuole, mediante il modello vgg, vedere quali oggetti vi siano presenti
 
 Questa API restituisce un JSON. Il risultato è il seguente:
 ```
