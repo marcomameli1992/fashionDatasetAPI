@@ -11,11 +11,11 @@ from PIL import Image
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
-""" #Fashion Dataset API"""
-""" ####Creazione di API per analizzare un Fashion dataset e provare a predire i futuri trend nel campo della moda. Queste API lavorano con file di testo in formato .txt o con immagini.
+""" # Fashion Dataset API"""
+""" Creazione di API per analizzare un Fashion dataset e provare a predire i futuri trend nel campo della moda. Queste API lavorano con file di testo in formato .txt o con immagini.
 E restituiscono i risultati in formato JSON"""
-"""####**API N°1:** CONTEGGIO DI NUMERO DI IMMAGINI PER CLASSE"""
-"""######/imm_per_classe"""
+"""#### **API N°1:** CONTEGGIO DI NUMERO DI IMMAGINI PER CLASSE"""
+"""###### /imm_per_classe"""
 """Questa API restituisce un JSON contenente il numero di immagini per ogni classe. Il risultato è il seguente:
 '''
 [
