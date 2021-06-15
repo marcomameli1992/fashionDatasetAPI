@@ -15,7 +15,7 @@ app.config["DEBUG"] = True
 """ Creazione di API per analizzare un Fashion dataset e provare a predire i futuri trend nel campo della moda. Queste API lavorano con file di testo in formato .txt o con immagini.
 E restituiscono i risultati in formato JSON"""
 """#### **API N°1:** CONTEGGIO DI NUMERO DI IMMAGINI PER CLASSE"""
-"""###### /imm_per_classe"""
+"""###### /img_per_classe"""
 """Questa API restituisce un JSON contenente il numero di immagini per ogni classe. Il risultato è il seguente:
 '''
 [
@@ -33,7 +33,7 @@ E restituiscono i risultati in formato JSON"""
 '''
 """
 # API n.1: conteggio di numero di immagini per classe
-@app.route('/imm_per_classe', methods=['GET'])
+@app.route('/img_per_classe', methods=['GET'])
 def im_per_classe():
     appoggio = list()
     for classe in range(8):
@@ -76,7 +76,7 @@ def piu_di_uno():
 def piu_stessa_classe():
     if 'classe' in request.args:
         classe = str(request.args['classe'])
-        if (classe>7):
+        if (int(classe)>7):
             return "Errore: la classe non esiste"
         st_classe = collection.find(
             {"$and": [{"contenuto.classe_oggetto": classe}, {'numero_oggetti': {"$gt": 1}}]}).count()
