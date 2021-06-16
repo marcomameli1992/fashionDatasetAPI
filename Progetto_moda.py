@@ -110,7 +110,7 @@ def piu_uno_piu_classi():
                 contatore += 1
                 break
     text_valore = {f'Le_foto_con_piu_di_un_oggetto_di_classi_diverse_sono': str(contatore)}
-    return text_valore
+    return text_valore, 200
 
 """####**API N°3:** VALUTAZIONE DEL COLORE DOMINANTE DI UNA DETERMINATA IMMAGINE"""
 """######/dominante"""
@@ -146,11 +146,12 @@ def colore_dominante():
             colori = '%02x%02x%02x' % (int(float(splittato[0])), int(float(splittato[1])), int(float(splittato[2])))
             esadecimali.append(colori)
         text_valore = {f'I_colori_dominanti_per_l_immagine_{jpg}_sono': str(esadecimali)}
-        return text_valore
+        return text_valore, 200
 
         #return "I colori dominanti per l'immagine " + jpg + " sono " + str(esadecimali)
     else:
-        return "Errore: Non hai specificato l'immagine. Riprova specificando l'immagine'."
+        text_error = {"Errore": "Non hai specificato l'immagine. Riprova specificando l'immagine"}
+        return text_error, 400
 
 """####**API N°4:** RICONOSCIMENTO OGGETTI PERSENTI IN UN'IMMAGINE CON MODELLO YOLOv5 """
 """######/YOLOv5"""
@@ -189,7 +190,8 @@ def ssd():
 
         return str(predictions) + "\n\n" + predictions2
     else:
-        return "Errore: Non hai specificato un'immagine. Riprova specificando un'immagine corretta."
+        text_error = {"Errore": "Non hai specificato un immagine. Riprova specificando un'immagine corretta."}
+        return text_error, 400
 
 """####**API N°5:** RICONOSCIMENTO OGGETTI PERSENTI IN UN'IMMAGINE CON MODELLO VGG"""
 """######/predvgg"""
@@ -229,11 +231,14 @@ def pred_vgg():
         model.eval()
         predictions = model(batch_t)
         # text_valore = "Le predizioni per l\'immagine sono':"+str(predictions)
-        result = str(predictions)
+        list = predictions.tolist()
+
+
+        #result = str(predictions)
         #index_i = result.index('[')
         #index_f = result.index(']')
         #risultato_stampa = result[index_i: index_f + 2]
-        return {f'Le_predizioni_per_l_immagine_{jpg}_sono': result}, 200
+        return {f'Le_predizioni_per_l_immagine_{jpg}_sono': list}, 200
     else:
         text_error = {"Errore": "Non hai specificato un immagine. Riprova specificando un'immagine corretta."}
         return text_error, 400

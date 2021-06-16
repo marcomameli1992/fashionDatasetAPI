@@ -1,4 +1,6 @@
+
 from pymongo import MongoClient
+
 import glob
 
 client = MongoClient(port=27017)
@@ -95,8 +97,11 @@ def carica_file(file_to_open):
         text_valore = {"classe_oggetto":appoggio[k][0], "val_1":appoggio[k][1], "val_2":appoggio[k][2], "val_3":appoggio[k][3], "val_4":appoggio[k][4]}
         content.append(text_valore)
 
+    key={"nome_file": file_to_open}
     text_file = {"nome_file": file_to_open, "numero_oggetti":n_righe, "contenuto": content}
-    collection.insert(text_file)
+
+
+    collection.update(key,text_file, upsert=True)
 
 
 for element in tutti_i_file0:
