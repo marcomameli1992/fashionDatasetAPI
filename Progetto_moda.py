@@ -233,9 +233,10 @@ def pred_vgg():
         #index_i = result.index('[')
         #index_f = result.index(']')
         #risultato_stampa = result[index_i: index_f + 2]
-        return {f'Le_predizioni_per_l_immagine_{jpg}_sono': result}
+        return {f'Le_predizioni_per_l_immagine_{jpg}_sono': result}, 200
     else:
-        return "Errore: Non hai specificato un immagine. Riprova specificando un'immagine corretta."
+        text_error = {"Errore": "Non hai specificato un immagine. Riprova specificando un'immagine corretta."}
+        return text_error, 400
 
 
 app.run()
