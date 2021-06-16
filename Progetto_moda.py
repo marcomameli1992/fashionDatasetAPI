@@ -41,7 +41,7 @@ def im_per_classe():
         immagini_per_classe = collection.find({"contenuto.classe_oggetto": classe}).count()
         text_valore = {f'Le_foto_con_oggetti_della_classe_{classe}_sono': immagini_per_classe}
         appoggio.append(text_valore)
-    return jsonify(appoggio)
+    return jsonify(appoggio), 200
 
 """####**API N°2:** CONTEGGIO DI IMMAGINI CON PIU' DI UN OGGETTO DENTRO"""
 """######/molti_oggetti/all"""
@@ -57,7 +57,7 @@ def im_per_classe():
 def piu_di_uno():
     piuoggettipresenti = collection.find({'numero_oggetti': {"$gt": 1}}).count()
     text_valore = {"Le_foto_con_piu_oggetti_presenti_sono:": piuoggettipresenti}
-    return text_valore
+    return text_valore, 200
 
 """####**API N°2.1:** CONTEGGIO DI IMMAGINI CON PIU' DI UN OGGETTO DELLA STESSA CLASSE DENTRO"""
 """######/molti_oggetti"""
@@ -77,13 +77,15 @@ def piu_stessa_classe():
     if 'classe' in request.args:
         classe = str(request.args['classe'])
         if (int(classe)>7):
-            return "Errore: la classe non esiste"
+            text_error = {"Errore": "la classe non esiste"}
+            return text_error, 404
         st_classe = collection.find(
             {"$and": [{"contenuto.classe_oggetto": classe}, {'numero_oggetti': {"$gt": 1}}]}).count()
         text_valore = {f'Le_foto_con_piu_di_un_oggetto_della_classe_{classe}_sono': st_classe}
-        return text_valore
+        return text_valore, 200
     else:
-        return "Errore: Non hai specificato la classe. Riprova specificando la classe."
+        text_error = { 'Errore': 'Non hai specificato la classe. Riprova specificando la classe.'}
+        return text_error, 400
 
 """####**API N°2.2:** CONTEGGIO DI IMMAGINI CON PIU' DI UN OGGETTO DI CLASSI DIVERSE DENTRO"""
 """######/molti_oggetti/molte_classi"""
