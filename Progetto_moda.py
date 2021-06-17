@@ -3,6 +3,10 @@ import torch
 from flask import request, jsonify
 from matplotlib import pyplot as plt, patches
 
+import cv2
+import torch
+from PIL import Image
+
 from database import collection
 from sklearn.cluster import KMeans
 import cv2
@@ -195,31 +199,26 @@ def colore_dominante():
 
 
 @app.route('/YOLOv5')
-def ssd():
+def pred_yolo():
     if 'img' in request.args:
         jpg = str(request.args['img'])
-        import cv2
-        import torch
-        from PIL import Image
 
-        # Model
+
         model = torch.hub.load('ultralytics/yolov5', 'yolov5s')
 
-        img1 = Image.open(jpg)  # PIL image
-        img2 = cv2.imread(jpg)[:, :, ::-1]  # OpenCV image (BGR to RGB)
-        imgs = [img1, img2]  # batch of images
+        #img1 = Image.open(jpg) metodo alternativo per aprire l'immagine, non serve
+        img2 = cv2.imread(jpg)[:, :, ::-1]
+        #imgs = [img1, img2]
 
-        # Inference
-        results = model(imgs, size=640)  # includes NMS
+        #risultati
+        results = model(img2, size=640)
 
-        # Results
-        results.print()
-        results.save()  # or .show()
+        results.print() #permette di controllare su terminale i risultati ottenuti
+        results.save()  #salva l'immagine con gli oggetti evidenziati
 
-        predictions = results.xyxy[0]  # img1 predictions (tensor)
-        predictions2 = results.pandas().xyxy[0].to_json(orient="records")  # img1 predictions (pandas)
+        predictions2 = results.pandas().xyxy[0].to_json(orient="records")
 
-        return str(predictions) + "\n\n" + predictions2
+        return predictions2
     else:
         text_error = {"Errore": "Non hai specificato un immagine. Riprova specificando un'immagine corretta."}
         return text_error, 400
