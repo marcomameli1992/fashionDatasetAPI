@@ -84,7 +84,7 @@ def piu_di_uno():
 def piu_stessa_classe():
     if 'classe' in request.args:
         classe = str(request.args['classe'])
-        if (int(classe) > 7):
+        if (int(classe) > 8):
             text_error = {"Errore": "la classe non esiste"}
             return text_error, 404
         result=0
