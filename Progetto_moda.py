@@ -32,6 +32,8 @@ E restituiscono i risultati in formato JSON"""
 ]
 '''
 """
+
+
 # API n.1: conteggio di numero di immagini per classe
 @app.route('/img_per_classe', methods=['GET'])
 def im_per_classe():
@@ -43,6 +45,7 @@ def im_per_classe():
         appoggio.append(text_valore)
     return jsonify(appoggio), 200
 
+
 """####**API N°2:** CONTEGGIO DI IMMAGINI CON PIU' DI UN OGGETTO DENTRO"""
 """######/molti_oggetti/all"""
 """Questa API restituisce un JSON contenente il numero di immagini che hanno più di un oggetto al loro interno. Il risultato è il seguente:
@@ -52,12 +55,15 @@ def im_per_classe():
 }
 '''
 """
+
+
 # API n.2: conteggio di immagini con più di un oggetto dentro
 @app.route('/molti_oggetti/all', methods=['GET'])
 def piu_di_uno():
     piuoggettipresenti = collection.find({'numero_oggetti': {"$gt": 1}}).count()
     text_valore = {"Le_foto_con_piu_oggetti_presenti_sono:": piuoggettipresenti}
     return text_valore, 200
+
 
 """####**API N°2.1:** CONTEGGIO DI IMMAGINI CON PIU' DI UN OGGETTO DELLA STESSA CLASSE DENTRO"""
 """######/molti_oggetti"""
@@ -71,21 +77,38 @@ def piu_di_uno():
 }
 '''
 """
+
+
 # API n.2-1: conteggio di immagini con più di un oggetto della stessa classe dentro
 @app.route('/molti_oggetti', methods=['GET'])
 def piu_stessa_classe():
     if 'classe' in request.args:
         classe = str(request.args['classe'])
-        if (int(classe)>7):
+        if (int(classe) > 7):
             text_error = {"Errore": "la classe non esiste"}
             return text_error, 404
+        result=0
         st_classe = collection.find(
-            {"$and": [{"contenuto.classe_oggetto": classe}, {'numero_oggetti': {"$gt": 1}}]}).count()
-        text_valore = {f'Le_foto_con_piu_di_un_oggetto_della_classe_{classe}_sono': st_classe}
+            {"$and": [{"contenuto.classe_oggetto": classe}, {'numero_oggetti': {"$gt": 1}}]})
+        for doc in st_classe:
+            array = doc['contenuto']
+            valut=0
+            for j in array:
+                val = j['classe_oggetto']
+                if val == classe:
+                    valut +=1
+                    if valut>1:
+                        result += 1
+                        break
+        text_valore = {f'Le_foto_con_piu_di_un_oggetto_della_classe_{classe}_sono': result}
+        print(st_classe.count())
         return text_valore, 200
     else:
-        text_error = { 'Errore': 'Non hai specificato la classe. Riprova specificando la classe.'}
+        text_error = {'Errore': 'Non hai specificato la classe. Riprova specificando la classe.'}
         return text_error, 400
+
+
+
 
 """####**API N°2.2:** CONTEGGIO DI IMMAGINI CON PIU' DI UN OGGETTO DI CLASSI DIVERSE DENTRO"""
 """######/molti_oggetti/molte_classi"""
@@ -96,6 +119,8 @@ def piu_stessa_classe():
 }
 '''
 """
+
+
 # API n.2-2: conteggio di immagini con più di un oggetto di classi dentro
 @app.route('/molti_oggetti/molte_classi', methods=['GET'])
 def piu_uno_piu_classi():
@@ -112,6 +137,7 @@ def piu_uno_piu_classi():
     text_valore = {f'Le_foto_con_piu_di_un_oggetto_di_classi_diverse_sono': str(contatore)}
     return text_valore, 200
 
+
 """####**API N°3:** VALUTAZIONE DEL COLORE DOMINANTE DI UNA DETERMINATA IMMAGINE"""
 """######/dominante"""
 """ 
@@ -126,6 +152,8 @@ def piu_uno_piu_classi():
 }
 '''
 """
+
+
 # API n.3: per una determinata classe quale è il colore predominante
 @app.route('/dominante')
 def colore_dominante():
@@ -148,10 +176,11 @@ def colore_dominante():
         text_valore = {f'I_colori_dominanti_per_l_immagine_{jpg}_sono': str(esadecimali)}
         return text_valore, 200
 
-        #return "I colori dominanti per l'immagine " + jpg + " sono " + str(esadecimali)
+        # return "I colori dominanti per l'immagine " + jpg + " sono " + str(esadecimali)
     else:
         text_error = {"Errore": "Non hai specificato l'immagine. Riprova specificando l'immagine"}
         return text_error, 400
+
 
 """####**API N°4:** RICONOSCIMENTO OGGETTI PERSENTI IN UN'IMMAGINE CON MODELLO YOLOv5 """
 """######/YOLOv5"""
@@ -163,6 +192,8 @@ def colore_dominante():
 "string"
 '''
 """
+
+
 @app.route('/YOLOv5')
 def ssd():
     if 'img' in request.args:
@@ -193,6 +224,7 @@ def ssd():
         text_error = {"Errore": "Non hai specificato un immagine. Riprova specificando un'immagine corretta."}
         return text_error, 400
 
+
 """####**API N°5:** RICONOSCIMENTO OGGETTI PERSENTI IN UN'IMMAGINE CON MODELLO VGG"""
 """######/predvgg"""
 """ 
@@ -205,8 +237,10 @@ def ssd():
 }
 '''
 """
-# API 4: Vgg16
-@app.route('/predvgg')
+
+
+# API 5: Vgg16
+@app.route('/predvgg', methods=['GET'])
 def pred_vgg():
     if 'img' in request.args:
         jpg = str(request.args['img'])
@@ -221,23 +255,16 @@ def pred_vgg():
                 std=[0.229, 0.224, 0.225]  # [7]
             )])
 
-        # img = cv2.resize(cv2.imread('./255201749_3778225.jpg'),(224,224))
         img_t = transform(img)
         batch_t = torch.unsqueeze(img_t, 0)
 
-        # img = np.expand_dims(img, axis=0)
         model = models.vgg16(pretrained=True)
-        # model.to(device)
+
         model.eval()
         predictions = model(batch_t)
-        # text_valore = "Le predizioni per l\'immagine sono':"+str(predictions)
+
         list = predictions.tolist()
 
-
-        #result = str(predictions)
-        #index_i = result.index('[')
-        #index_f = result.index(']')
-        #risultato_stampa = result[index_i: index_f + 2]
         return {f'Le_predizioni_per_l_immagine_{jpg}_sono': list}, 200
     else:
         text_error = {"Errore": "Non hai specificato un immagine. Riprova specificando un'immagine corretta."}
