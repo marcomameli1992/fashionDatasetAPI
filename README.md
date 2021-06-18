@@ -14,7 +14,26 @@ Questa API restituisce un JSON contenente il numero di immagini per ogni classe.
     "Le_foto_con_oggetti_della_classe_4_sono'": 0,
     "Le_foto_con_oggetti_della_classe_5_sono'": 0,
     "Le_foto_con_oggetti_della_classe_6_sono'": 0,
-    "Le_foto_con_oggetti_della_classe_7_sono'": 0
+    "Le_foto_con_oggetti_della_classe_7_sono'": 0,
+	"Le_foto_con_oggetti_della_classe_8_sono'": 0
+  }
+]
+```
+- **Parametri:** *nomi* -> non va valorizzato
+
+Se specificato questo parametro il numero delle classi viene convertito nel nome della classe che rappresenta in questo modo l'API restituisce un JSON, più leggibile contenente il numero di immagini che hanno più di un oggetto della stessa classe al loro interno. Il risultato è il seguente:
+```
+[
+  {
+    "Le_foto_con_oggetti_della_classe_BAULETTO_sono'": 0,
+    "Le_foto_con_oggetti_della_classe_CLUTCH_sono'": 0,
+    "Le_foto_con_oggetti_della_classe_HOBO_sono'": 0,
+    "Le_foto_con_oggetti_della_classe_MARSUPIO_sono'": 0,
+    "Le_foto_con_oggetti_della_classe_SACCA_sono'": 0,
+    "Le_foto_con_oggetti_della_classe_SECCHIELLO_sono'": 0,
+    "Le_foto_con_oggetti_della_classe_SHOPPING_sono'": 0,
+    "Le_foto_con_oggetti_della_classe_TRACOLLA_sono'": 0,
+	"Le_foto_con_oggetti_della_classe_ZAINO_sono'": 0
   }
 ]
 ```
