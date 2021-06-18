@@ -65,7 +65,7 @@ Questa API restituisce un JSON contenente il numero di immagini che hanno più d
 ###### /molti_oggetti
 
 * **Parametri:** 
-* * _classe_ -> una **stringa** che corrisponde al numero della classe di cui si vuole eseguire il conteggio
+* * _classe_ -> una **stringa** che corrisponde al numero della classe, o al suo nome, di cui si vuole eseguire il conteggio
 * *  _nomi_ -> non va valorizzato _**FACOLTATIVO**_
 
 Questa API restituisce un JSON contenente il numero di immagini che hanno più di un oggetto della stessa classe al loro interno. Il risultato è il seguente:
