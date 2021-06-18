@@ -1,3 +1,5 @@
+import string
+
 import flask
 import torch
 from flask import request, jsonify
@@ -36,7 +38,7 @@ E restituiscono i risultati in formato JSON"""
 ]
 '''
 """
-
+classi_ammesse=['bauletto','clutch', 'hobo', 'marsupio', 'sacca', 'secchiello','shopping','tracolla','zaino']
 
 # API n.1: conteggio di numero di immagini per classe
 @app.route('/img_per_classe', methods=['GET'])
@@ -89,10 +91,19 @@ def piu_di_uno():
 @app.route('/molti_oggetti', methods=['GET'])
 def piu_stessa_classe():
     if 'classe' in request.args:
-        classe = str(request.args['classe'])
-        if (int(classe) > 8):
-            text_error = {"Errore": "la classe non esiste"}
-            return text_error, 404
+        classe = request.args['classe']
+        if (classe.isnumeric()):
+            nome=nomeClasse(int(classe))
+            classe=classe
+            if (int(classe) > 8):
+                text_error = {"Errore": "la classe non esiste"}
+                return text_error, 404
+        elif isinstance(classe,str):
+            nome=classe.lower()
+            if not(nome in classi_ammesse):
+                text_error = {"Errore": "la classe non esiste"}
+                return text_error, 404
+            else: classe=classeNome(nome)
         result=0
         st_classe = collection.find(
             {"$and": [{"contenuto.classe_oggetto": classe}, {'numero_oggetti': {"$gt": 1}}]})
@@ -107,7 +118,8 @@ def piu_stessa_classe():
                         result += 1
                         break
         text_valore = {f'Le_foto_con_piu_di_un_oggetto_della_classe_{classe}_sono': result}
-        print(st_classe.count())
+        if 'nomi' in request.args:
+            text_valore={f'Le_foto_con_piu_di_un_oggetto_della_classe_{nome.upper()}_sono': result}
         return text_valore, 200
     else:
         text_error = {'Errore': 'Non hai specificato la classe. Riprova specificando la classe.'}
@@ -294,4 +306,26 @@ def nomeClasse(classes):
     else: nome = "CLASSE_INESISTENTE"
     return nome
 
+def classeNome(nomes):
+    nome=str(nomes).lower()
+    if nome=="bauletto":
+        classe='0'
+    elif nome == "clutch":
+        classe = '1'
+    elif nome == "hobo":
+        classe = '2'
+    elif nome == "marsupio":
+        classe = '3'
+    elif nome == "sacca":
+        classe = '4'
+    elif nome == "secchiello":
+        classe = '5'
+    elif nome == "shopping":
+        classe = '6'
+    elif nome == "tracolla":
+        classe = '7'
+    elif nome == "zaino":
+        classe = '8'
+    else: classe = 'Inesistente'
+    return classe
 app.run()
