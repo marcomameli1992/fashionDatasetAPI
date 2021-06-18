@@ -42,10 +42,12 @@ E restituiscono i risultati in formato JSON"""
 @app.route('/img_per_classe', methods=['GET'])
 def im_per_classe():
     appoggio = list()
-    for classe in range(8):
+    for classe in range(9):
         classe = str(classe)
         immagini_per_classe = collection.find({"contenuto.classe_oggetto": classe}).count()
         text_valore = {f'Le_foto_con_oggetti_della_classe_{classe}_sono': immagini_per_classe}
+        if 'nomi' in request.args:
+            text_valore = {f'Le_foto_con_oggetti_della_classe_{nomeClasse(classe)}_sono': immagini_per_classe}
         appoggio.append(text_valore)
     return jsonify(appoggio), 200
 
@@ -269,5 +271,27 @@ def pred_vgg():
         text_error = {"Errore": "Non hai specificato un immagine. Riprova specificando un'immagine corretta."}
         return text_error, 400
 
+def nomeClasse(classes):
+    classe=int(classes)
+    if classe == 0:
+        nome = "BAULETTO"
+    elif classe == 1:
+        nome = "CLUTCH"
+    elif classe == 2:
+        nome = "HOBO"
+    elif classe == 3:
+        nome = "MARSUPIO"
+    elif classe == 4:
+        nome = "SACCA"
+    elif classe == 5:
+        nome = "SECCHIELLO"
+    elif classe == 6:
+        nome = "SHOPPING"
+    elif classe == 7:
+        nome = "TRACOLLA"
+    elif classe == 8:
+        nome = "ZAINO"
+    else: nome = "CLASSE_INESISTENTE"
+    return nome
 
 app.run()
