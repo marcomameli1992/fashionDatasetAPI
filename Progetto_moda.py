@@ -1,3 +1,4 @@
+import json
 import string
 
 import flask
@@ -275,10 +276,13 @@ def pred_vgg():
 
         model.eval()
         predictions = model(batch_t)
-
+        _, y_hat = predictions.max(1)
+        predicted_idx = str(y_hat.item())
+        imagenet_class_index = json.load(open('Image/imagenet_class_index.json'))
+        class_id, class_name=imagenet_class_index[predicted_idx]
         list = predictions.tolist()
 
-        return {f'Le_predizioni_per_l_immagine_{jpg}_sono': list}, 200
+        return {f'Le_predizioni_per_l_immagine_{jpg}_sono': list, 'classe_id':class_id,'nome_classe':class_name}, 200
     else:
         text_error = {"Errore": "Non hai specificato un immagine. Riprova specificando un'immagine corretta."}
         return text_error, 400
