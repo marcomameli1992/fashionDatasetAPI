@@ -65,7 +65,7 @@ Questa API restituisce un JSON contenente il numero di immagini che hanno più d
 ###### /molti_oggetti
 
 * **Parametri:** 
-* * _classe_ -> una **stringa** che corrisponde al numero della classe, o al suo nome, di cui si vuole eseguire il conteggio
+* * _classe_ -> una **stringa** che corrisponde al numero della classe, o al suo nome(case insensitive), di cui si vuole eseguire il conteggio
 * *  _nomi_ -> non va valorizzato _**FACOLTATIVO**_
 
 Questa API restituisce un JSON contenente il numero di immagini che hanno più di un oggetto della stessa classe al loro interno. Il risultato è il seguente:
@@ -77,6 +77,18 @@ Questa API restituisce un JSON contenente il numero di immagini che hanno più d
 ```
 ----
 Se viene specificato il parametro **_nomi_** il numero delle classi viene convertito nel nome della classe che rappresenta in questo modo l'API restituisce un JSON, più leggibile contenente il numero di immagini che hanno più di un oggetto della stessa classe al loro interno.
+Se non viene passato il parametro _classe_ il risultato è il seguente:
+```
+{
+  "Errore": Non hai specificato la classe. Riprova specificando la classe."
+}
+```
+Se viene passata al parametro _classe_ una classe che non esiste il risultato è il seguente:
+```
+{
+  "Errore": "la classe non esiste"
+}
+```
 
 ----
 ----
@@ -108,6 +120,13 @@ Questa API restituisce un JSON contenente i colori dominanti di ciascun'immagine
   ]
 }
 ```
+Se non viene passato il parametro _img_ il risultato è il seguente:
+```
+{
+  "Errore": Non hai specificato l'immagine. Riprova specificando l'immagine"
+}
+```
+
 ----
 ----
 #### **API N°4:** RICONOSCIMENTO OGGETTI PERSENTI IN UN'IMMAGINE CON MODELLO YOLOv5
@@ -121,6 +140,13 @@ Questa API restituisce un JSON. Il risultato è il seguente:
 ```
 "string"
 ```
+Se non viene passato il parametro _img_ il risultato è il seguente:
+```
+{
+  "Errore": Non hai specificato un immagine. Riprova specificando un'immagine corretta."
+}
+```
+
 ----
 ----
 #### **API N°5:** RICONOSCIMENTO OGGETTI PERSENTI IN UN'IMMAGINE CON MODELLO VGG
@@ -133,8 +159,17 @@ Questa API restituisce un JSON. Il risultato è il seguente:
 
 ```
 {
-  "Le_predizioni_per_l_immagine_{img}_sono": "string"
+  "Le_predizioni_per_l_immagine_{img}_sono": [array],
+  "classe_id": "string",
+  "nome_classe": "string"
 }
 ```
+Se non viene passato il parametro _img_ il risultato è il seguente:
+```
+{
+  "Errore": Non hai specificato un immagine. Riprova specificando un'immagine corretta."
+}
+```
+
 ----
 ----
